@@ -14,7 +14,7 @@ For details about PLL estimator, refer to Microchip application note [AN1292](ht
 ### 2.1 Motor Control Application Firmware Required for the Demonstration
 
 To clone or download this application firmware on GitHub, 
-- Navigate to the [main page of this repository](https://github.com/microchip-pic-avr-solutions/sip-mc-development-board-an1292-dsPIC33CDVC256MP506) and 
+- Navigate to the [main page of this repository](https://github.com/microchip-pic-avr-solutions/sip-mc-development-board-an1292-dspic33cdvc256mp506) and 
 - On the tab **<> Code**, above the list of files in the right-hand corner, click Code, then from the menu, click **Download ZIP** or copy the repository URL to **clone.**
 > **Note:** </br>
 >In this document, hereinafter this firmware package is referred as **firmware.**
