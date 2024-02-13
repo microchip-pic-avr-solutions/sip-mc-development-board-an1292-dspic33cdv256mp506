@@ -122,12 +122,13 @@ void ResetParmeters(void);
 int main ( void )
 {
     InitOscillator();
-    /* Reset parameters used for running motor through Inverter A*/
     ResetParmeters();
     SetupGPIOPorts();
     CN_PortBEnable();
+    
     /* Turn on LED1 to indicate the device is programmed */
     LED1 = 1;
+    
     /* Initialize Peripherals */
     InitPeripherals();
     DiagnosticsInit();
@@ -136,7 +137,6 @@ int main ( void )
     CORCONbits.SATA = 0;
     while(1)
     {        
-        /* Reset parameters used for running motor through Inverter A*/
         ResetParmeters();
         while(systemState != SYSTEM_READY)
         {
@@ -146,9 +146,10 @@ int main ( void )
         while(1)
         {
             ResetSingleShuntSamplePoint(&singleShuntParam);
+            
             DiagnosticsStepMain();
             BoardService();
-            // Monitoring for Button 1 press
+            
             if (IsPressed_Button1())
             {
                 if  (uGF.bits.RunMotor == 1)
@@ -163,9 +164,7 @@ int main ( void )
                     EnablePWMOutputsInverterA();
                     uGF.bits.RunMotor = 1;
                 }
-
             }
-            // Monitoring for Button 2 press
             if (IsPressed_Button2())
             {
                 if ((uGF.bits.RunMotor == 1) && (uGF.bits.OpenLoop == 0))
@@ -357,8 +356,7 @@ void DoControl( void )
             
             ctrlParm.targetSpeed = (__builtin_mulss(measureInputs.potValue,
                     NOMINALSPEED_ELECTR-ENDSPEED_ELECTR)>>15) +
-                    ENDSPEED_ELECTR;  
-            
+                    ENDSPEED_ELECTR;           
         }
         if  (ctrlParm.speedRampCount < SPEEDREFRAMP_COUNT)
         {
