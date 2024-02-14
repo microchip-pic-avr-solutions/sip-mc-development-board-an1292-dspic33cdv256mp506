@@ -3,7 +3,7 @@
 
 
 ## 1. INTRODUCTION
-This document describes the setup requirements for driving a Permanent Magnet Synchronous Motor (PMSM) using Sensorless Field Oriented Control (FOC) and PLL Estimator algorithms on the hardware platform dsPIC33CDVC256MP506 Motor Control Development Board.
+This document describes the setup requirements for driving a Permanent Magnet Synchronous Motor (PMSM) using Sensorless Field Oriented Control (FOC) and PLL Estimator algorithm on the hardware platform dsPIC33CDVC256MP506 Motor Control Development Board[(EV32J63A)](https://www.microchip.com/en-us/development-tool/EV32J63A).
 
 For details about PLL estimator, refer to Microchip application note [AN1292](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/01292A.pdf) “Sensorless Field Oriented Control (FOC) for a Permanent Magnet Synchronous Motor (PMSM) Using a PLL Estimator and Field Weakening (FW)”
 
@@ -37,34 +37,36 @@ To clone or download this application firmware on GitHub,
 </br>
 
 ## 3. HARDWARE SETUP
-This section describes hardware setup required for the demonstration.
+This section describes the hardware setup required for the demonstration.
+> **Note:** </br>
+>In this document, hereinafter the dsPIC33CDVC256MP506 Motor Control Development Board is referred as **development board**.
 
 1. The blue color power-on LED (LD3) indicates the device dsPIC33CDVC256MP506 is populated on the development board
 
      <p align="left" >
      <img  src="images/boardname.PNG"></p>
 
-2. Motor currents are amplified on the Motor Control Development Board; it can also be amplified by the amplifiers internal to the device dsPIC33CDVC256MP506. The firmware and development board are configured to sample and convert internal amplifier outputs (**'internal op-amp configuration'**) by default to measure the motor currents needed to implement FOC.**Table-1** summarizes the resistors to be populated and removed to convert the development board from **‘internal op-amp configuration’** to **‘external op-amp configuration’** or vice versa.
+2. Motor currents are amplified on the Motor Control Development Board; it can also be amplified by the amplifiers internal to the device dsPIC33CDVC256MP506. The firmware and development board are configured to sample and convert the internal amplifier outputs (**'internal op-amp configuration'**) by default to measure the motor currents needed to implement FOC. **Table-1** summarizes the resistors to be populated and removed to convert the development board from **‘internal op-amp configuration’** to **‘external op-amp configuration’** or vice versa.
 
      <p align="left" >
      <img  src="images/Tableopamp.png"></p>
 
-3. Connect the 3-phase wires from the motor to PHC, PHB, and PHA of the **connector J10**(no specific order), provided on the dsPIC33CDVC256MP506 Motor Control Development Board.
+3. Connect the 3-phase wires from the motor to PHC, PHB, and PHA of the **connector J10**(no specific order), provided on the development board.
 
      <p align="left" >
      <img  src="images/motorconnection.png"></p>
 
-4. Plug the 24V power supply to **connector J1** on the dsPIC33CDVC256MP506 Motor Control Development Board. Alternatively, the development board can also be powered through connector J2.
+4. Plug the 24V power supply to **connector J1** on the development board. Alternatively, the development board can also be powered through connector J2.
 
      <p align="left" >
      <img  src="images/boardpower.png"></p>
  
-5. The board has an onboard programmer **PICkit™ On Board (PKoBv4)** , which can be used for programming or debugging the microcontroller or dsPIC DSC on the development board. To use the onboard programmer, connect a micro-USB cable between the Host PC and **connector J12** on the dsPIC33CDVC256MP506 Motor Control Development Board.
+5. The board has an onboard programmer **PICkit™ On Board (PKoBv4)** , which can be used for programming or debugging the microcontroller or dsPIC DSC on the development board. To use the onboard programmer, connect a micro-USB cable between the Host PC and **connector J12** on the development board. 
 
      <p align="left" >
      <img  src="images/boardpkob.png"></p>
 
-6. Alternatively, connect the Microchip programmer/debugger [MPLAB® PICkit™ 4 In-Circuit Debugger](https://www.microchip.com/en-us/development-tool/PG164140) between the Host PC used for programming the device and the **ICSP header J6** on the dsPIC33CDVC256MP506 Motor Control Development Board (as shown). Ensure that PICkit 4 is oriented correctly before proceeding.
+6. Alternatively, connect the Microchip programmer/debugger [MPLAB® PICkit™ 4 In-Circuit Debugger](https://www.microchip.com/en-us/development-tool/PG164140) between the Host PC used for programming the device and the **ICSP header J6** on the development board(as shown in the figure below). Ensure that, the PICkit 4 is oriented correctly before proceeding.
 
      <p align="left" >
      <img  src="images/boardpickit.PNG"></p>
@@ -121,7 +123,7 @@ Follow the below instructions, step by step, to set up and run the motor control
         <p align="left"><img  src="images/externalopampconfig.png"></p> 
 
 > **Note:**</br>
->The motor phase currents can be reconstructed from the DC Bus current by appropriately sampling it during the PWM switching period, called a single-shunt reconstruction algorithm. The firmware can be configured to demonstrate **the single shunt reconstruction algorithm** by defining the macro <code>**SINGLE_SHUNT**</code> in the header file <code>**userparms.h**</code> 
+>The motor phase currents can be reconstructed from the DC Bus current by appropriately sampling it during the PWM switching period, called as single-shunt reconstruction algorithm. The firmware can be configured to demonstrate **the single shunt reconstruction algorithm** by defining the macro <code>**SINGLE_SHUNT**</code> in the header file <code>**userparms.h**</code> 
 >For additional information, refer to Microchip application note **[AN1299](http://ww1.microchip.com/downloads/en/appnotes/01299a.pdf), “Single-Shunt Three-Phase Current Reconstruction Algorithm for Sensorless FOC of a PMSM.”**
 >By default, the firmware uses phase currents measured across the phase shunt resistors on two of the half-bridges of the three-phase inverter (**‘dual shunt configuration’**) to implement FOC.
 
@@ -189,7 +191,7 @@ Press the push button **SW2** again to revert the speed of the motor to its nomi
 
 X2C-Scope is a third-party plug-in in MPLAB X, which helps in real-time diagnostics. The application firmware comes with the initialization needed to interface the controller with the host PC to enable data visualization through the X2C-Scope plug-in. Ensure the X2C-Scope plug-in is installed. For more information on how to set up a plug-in, refer to either the [Microchip Developer Help page](https://microchipdeveloper.com/mplabx:tools-plugins-available) or the [web page.](https://x2cscope.github.io/docs/MPLABX_Plugin.html)
  
-1. To establish serial communication with the host PC, connect a micro-USB cable between the host PC and **connector J12** on the dsPIC33CDVC256MP506 Motor Control Development Board. This interface is also used for programming.
+1. To establish serial communication with the host PC, connect a micro-USB cable between the host PC and **connector J12** on the development board. This interface is also used for programming.
 
 
 2. Ensure the application is configured and running as described under section [5.2 Basic Demonstration](#52-basic-demonstration) by following steps 1 through 11.
@@ -206,7 +208,7 @@ X2C-Scope is a third-party plug-in in MPLAB X, which helps in real-time diagnost
 5. To configure and establish the serial communication for **X2C-Scope**, open the **X2CScope Configuration** window, click on the **Connection Setup** tab and:
      - Set **Baudrate** as **115200**, which is configured in the application firmware. 
      - Click on the **Refresh** button to refresh and update the list of the available Serial COM ports connected to the Host PC. 
-     - Select the specific **Serial port** detected when interfaced with the dsPIC33CDVC256MP506 Motor Control Development Board. The **Serial port** depends on the system settings
+     - Select the specific **Serial port** detected when interfaced with the development board. The **Serial port** depends on the system settings
 
     <p align="left">
      <img  src="images/x2cconnectionsetup.png"></p>
