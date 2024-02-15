@@ -8,7 +8,7 @@
     This file includes subroutine for initializing ADC Cores of Controller
 
   Description:
-    Definitions in the file are for dsPIC33CDVC256MP506 on Motor Control 
+    Definitions in the file are for dsPIC33CDV256MP506 on Motor Control 
     Development board from Microchip
 
 *******************************************************************************/

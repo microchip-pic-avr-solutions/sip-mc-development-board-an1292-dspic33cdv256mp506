@@ -5,7 +5,7 @@
  * This file includes subroutine for initializing Comparators.
  * The DAC is configured only for its basic operation.
  * 
- * Definitions in this file are for dsPIC33CDVC256MP506.
+ * Definitions in this file are for dsPIC33CDV256MP506.
  * 
  * Component: HAL - Comparator with DAC
  * 

@@ -4,7 +4,7 @@
  *
  * This file includes subroutine to configure UART1 Module
  * 
- * Definitions in this file are for dsPIC33CDVC256MP506.
+ * Definitions in this file are for dsPIC33CDV256MP506.
  * 
  * Component: Slave1 Core - HAL - UART1
  * 
